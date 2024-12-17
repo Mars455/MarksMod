@@ -2,6 +2,10 @@ package mars455.marksmod;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,4 +25,32 @@ public class Marksmod implements ModInitializer {
 
 		LOGGER.info("Hello Fabric world!");
 	}
+
+
+	public class MarksMod implements ModInitializer {
+		@Override
+		public void onInitialize() {
+			ModItems.initialize();
+		}
+	}
+
+	public class ModItems {
+		public static Item register(Item item, String id){
+			Identifier itemID = Identifier.of("mars455.marksmod:" + id);
+
+			Item registeredItem = Registry.register(Registries.ITEM, itemID, item);
+
+			return registeredItem;
+		}
+		public static void initialize() {
+
+		}
+		public static final Item CHARGED_STEEL = register(
+				new Item(new Item.Settings()),
+				"charged_steel"
+		);
+	}
+
+
+
 }
